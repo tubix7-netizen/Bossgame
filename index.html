@@ -91,27 +91,23 @@ button.uc.lg{background:linear-gradient(135deg,#ffe0f5,#d6e8ff,#fff3c4);border:2
 .tt .ta::before{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(180deg,rgba(10,40,110,0),rgba(10,40,110,.5));pointer-events:none;z-index:1}
 .tt .tin{z-index:2;position:absolute;left:15%;width:70%;bottom:20.7%;display:flex;flex-direction:column;gap:10px}
 .tt .trw{display:flex;gap:10px}
-.tt .tb{--g:255,255,255;position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 14px;margin:0;box-sizing:border-box;width:100%;border-radius:999px;font-weight:900;letter-spacing:.03em;line-height:1.15;color:#fff;text-shadow:0 1px 2px rgba(0,20,80,.75),0 0 8px rgba(0,20,80,.35);-webkit-tap-highlight-color:transparent;transition:transform .12s;border:1.5px solid rgba(255,255,255,.9);background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(var(--g),.3) 55%,rgba(255,255,255,.3));box-shadow:inset 0 1.5px 1px rgba(255,255,255,.95),inset 0 -2px 5px rgba(255,255,255,.4),inset 0 -12px 20px rgba(var(--g),.28),0 8px 20px rgba(0,40,120,.3),0 1px 3px rgba(0,0,0,.14)}
-@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.tt .tb{-webkit-backdrop-filter:blur(10px) saturate(1.7);backdrop-filter:blur(10px) saturate(1.7)}}
-.tt .tb::before{content:"";position:absolute;z-index:-1;left:7%;right:7%;top:5%;height:46%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0));pointer-events:none}
-.tt .tb::after{content:"";position:absolute;z-index:-1;top:-60%;left:-60%;width:26%;height:220%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.6),rgba(255,255,255,0));transform:rotate(14deg);animation:tshine 3.4s ease-in-out infinite;pointer-events:none}
-.tt .trk::after{animation-delay:.5s}.tt .tcn::after{animation-delay:1s}
-.tt .tb:active{transform:scale(.96)}
-.tt .tbt{display:flex;flex-direction:column;align-items:center;gap:1px}
-.tt .tbt small{display:block;font-size:.66em;font-weight:800;letter-spacing:.02em;opacity:.95}
-.tt .tic{width:1.05em;height:1.05em;flex:none;filter:drop-shadow(0 1px 2px rgba(0,30,100,.45))}
-.tt .tst{--g:255,150,10;height:56px;font-size:16.5px;text-shadow:0 1px 2px rgba(140,60,0,.8),0 0 6px rgba(140,60,0,.3);background:linear-gradient(180deg,#ffdc3d,#ffb300 55%,#ff9500);animation:ttg 2.6s ease-in-out infinite}
-.tt .tcn{--g:20,190,80;height:46px;font-size:13.5px;background:linear-gradient(180deg,#5eea7e,#19c04f 55%,#0fa843)}
-.tt .tbo,.tt .trk{height:46px;font-size:14px;padding:0 8px}
-.tt .tbo{--g:10,110,255;background:linear-gradient(180deg,#52c0ff,#1a82ff 55%,#0a60f0)}
-.tt .trk{--g:10,110,255;background:linear-gradient(180deg,#52c0ff,#1a82ff 55%,#0a60f0)}
-@keyframes ttg{0%,100%{box-shadow:inset 0 1.5px 1px rgba(255,255,255,.95),inset 0 -2px 5px rgba(255,255,255,.4),inset 0 -12px 20px rgba(var(--g),.28),0 8px 20px rgba(0,40,120,.3),0 0 14px rgba(255,200,70,.4)}50%{box-shadow:inset 0 1.5px 1px rgba(255,255,255,.95),inset 0 -2px 5px rgba(255,255,255,.4),inset 0 -12px 20px rgba(var(--g),.28),0 8px 20px rgba(0,40,120,.3),0 0 30px rgba(255,200,70,.85)}}
+.tt .tb{--ac:#7aa8ff;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:8px;margin:0;padding:0 10px;box-sizing:border-box;width:100%;height:46px;border-radius:14px;color:#fff;font-weight:800;font-size:15px;letter-spacing:.05em;line-height:1.2;background:linear-gradient(180deg,#2f66c9,#1a3f93);border:1px solid rgba(255,255,255,.35);border-top:3px solid var(--ac);box-shadow:0 6px 16px rgba(8,30,100,.45),inset 0 1px 0 rgba(255,255,255,.25);-webkit-tap-highlight-color:transparent;transition:transform .1s}
+.tt .tb:active{transform:scale(.97)}
+.tt .tbt{display:flex;flex-direction:column;align-items:center;gap:2px}
+.tt .tbt small{display:block;font-size:.72em;font-weight:600;letter-spacing:.02em;color:rgba(238,241,251,.8)}
+.tt .tic{display:none}
+.tt .tcn{background:linear-gradient(180deg,#62e27c,#18b84c);border:1px solid rgba(255,255,255,.65);border-top:3px solid #c9ffd5;color:#fff;text-shadow:0 1px 2px rgba(0,70,25,.55);box-shadow:0 6px 16px rgba(8,50,30,.35),inset 0 1px 0 rgba(255,255,255,.3)}
+.tt .tcn small{color:rgba(255,255,255,.92)}
+.tt .tbo,.tt .trk{background:linear-gradient(180deg,#fff,#e8effc);border:1px solid #fff;color:#17306e;text-shadow:none;box-shadow:0 6px 16px rgba(8,30,100,.35),inset 0 -3px 0 rgba(23,48,110,.1)}
+.tt .tst{height:58px;font-size:19px;letter-spacing:.14em;color:#5a3200;text-shadow:0 1px 0 rgba(255,255,255,.55);border:2px solid #fff3c4;background:linear-gradient(180deg,#ffe57f 0%,#ffbd1f 58%,#ffa800 100%);animation:tglow 2.4s ease-in-out infinite}
+.tt .tst::after{content:"";position:absolute;top:-60%;left:-60%;width:30%;height:220%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,236,170,.55),rgba(255,255,255,0));transform:rotate(14deg);animation:tshine 3s ease-in-out infinite;pointer-events:none}
+.tt .sp{font-style:normal;color:#fff;font-size:.75em;letter-spacing:0}
 @supports (width:1cqw){
-.tt .tin,.tt .trw{gap:2cqw}
-.tt .tb{gap:1.8cqw;padding:0 3.4cqw}
-.tt .tst{height:13cqw;font-size:4.6cqw}
-.tt .tcn{height:10.5cqw;font-size:3.6cqw}
-.tt .tbo,.tt .trk{height:10.5cqw;font-size:3.8cqw;padding:0 2cqw}
+.tt .tin,.tt .trw{gap:2.2cqw}
+.tt .tb{gap:2cqw}
+.tt .tst{height:14cqw;font-size:5cqw}
+.tt .tcn{height:11.5cqw;font-size:3.9cqw}
+.tt .tbo,.tt .trk{height:11.5cqw;font-size:4.1cqw}
 }
 .orn{font-size:18px;font-weight:700;color:#fff;margin:2px 0 14px;letter-spacing:.5px}
 .dws{display:flex;gap:10px;width:100%;max-width:320px}
@@ -3120,7 +3116,7 @@ function menuHtml(){var rn=S.run&&S.run.svR;var md=rn?(S.run.mode==='easy'?'이�
   var crown='<svg class="tic" viewBox="0 0 24 24"><path fill="#fff" d="M3 8l4.5 4L12 5l4.5 7L21 8l-1.8 10H4.8z"/><rect x="5" y="19" width="14" height="2.4" rx="1" fill="#fff"/></svg>';
   return '<div class="tt"><div class="ta"><img class="tti" src="'+TTLIMG+'" alt="믿음의 성 지키기" draggable="false"><div class="tin">'
   +(rn?'<button class="tb tcn" onclick="gContinue()"><span class="tbt">이어하기<small>'+md+'</small></span></button>':'')
-  +'<button class="tb tst" onclick="gView(\'start\')">'+play+'<span>시작하기</span></button>'
+  +'<button class="tb tst" onclick="gView(\'start\')">'+play+'<i class="sp">✦</i><span>시작하기</span><i class="sp">✦</i></button>'
   +'<div class="trw"><button class="tb tbo" onclick="gOpt()">'+gear+'<span>옵션</span></button>'
   +'<button class="tb trk" onclick="gView(\'rank\')">'+crown+'<span>랭킹</span></button></div>'
   +'</div></div></div>'}
