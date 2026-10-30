@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>모임을 지켜라</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f1ea;--card:#fff;--line:#ebe5da;--ink:#23262d;--dim:#7d7a74;--main:#24476b;--main2:#3a6b9c;--accent:#ef7d57;
+--red:#e04a3f;--blue:#3b7fd9;--yellow:#f2c230;--white:#ffffff;--black:#2b2b2b;--green:#3aa65a;--good:#2fa36b;--bad:#e04a3f;--boss:#c0392b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',sans-serif;font-size:17px;line-height:1.55}
+body{background-image:radial-gradient(#e6dfd2 1px,transparent 1px);background-size:18px 18px}
+.wrap{max-width:440px;margin:0 auto;padding:14px 14px 50px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:none;background:linear-gradient(135deg,var(--main2),var(--main));color:#fff;font:inherit;font-weight:700;font-size:18px;padding:16px;border-radius:16px;margin:10px 0;cursor:pointer;box-shadow:0 4px 12px #24476b33}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 6px #24476b33}
+.btn.sub{background:#fff;color:var(--main);border:2px solid var(--main);box-shadow:none}
+.card{background:var(--card);border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #0000000c;border:1px solid var(--line)}
+.hero{background:linear-gradient(145deg,#2f5f8f,#1c3756);color:#fff;border-radius:24px;padding:26px 20px 22px;text-align:center;margin:6px 0 14px;box-shadow:0 8px 24px #1c375640;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:#ffffff12}
+.hero .ic{font-size:52px;line-height:1}
+.hero h1{margin:8px 0 2px;font-size:32px;font-weight:900;letter-spacing:-.5px}
+.hero p{margin:0;opacity:.85;font-size:15px}
+.h1{font-size:26px;font-weight:900;color:var(--main);text-align:center;margin:18px 0 4px}
+.talk{display:flex;gap:12px;align-items:flex-start}
+.talk .av{width:52px;height:52px;border-radius:50%;background:#eaf0f6;display:flex;align-items:center;justify-content:center;font-size:30px;flex:none}
+.talk .who{font-size:13px;color:var(--dim);margin-bottom:3px;font-weight:700}
+.talk .say{background:#f1f5f9;border-radius:4px 16px 16px 16px;padding:11px 14px;font-size:16px}
+.role{display:flex;gap:12px;align-items:flex-start;padding:10px 0}
+.role+.role{border-top:1px dashed var(--line)}
+.role .ri{font-size:28px;width:40px;text-align:center;flex:none}
+.role b{color:var(--main)}
+.role .d{font-size:15px;color:#555}
+.info{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:16px}
+.info .k{color:var(--dim)}
+.info .v{font-weight:700}
+
+/* 게임 상단 */
+.status{background:linear-gradient(145deg,#2f5f8f,#1c3756);color:#fff;border-radius:22px;padding:14px 16px 16px;box-shadow:0 6px 18px #1c375633}
+.status .row1{display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.9}
+.shield{font-size:20px;letter-spacing:2px}
+.clock{text-align:center;font-size:48px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums;margin:4px 0 8px}
+.clock.low{color:#ffb4a2}
+.steps{display:flex;gap:6px}
+.steps i{flex:1;height:8px;border-radius:4px;background:#ffffff30}
+.steps i.on{background:#7ee2a8}
+.steps i.now{background:#ffd36b}
+.steps i.boss{flex:1.4}
+.meta{display:flex;gap:8px;margin:12px 0 0;flex-wrap:wrap}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:14px;font-weight:700;box-shadow:0 1px 4px #0000000a}
+.chip span{color:var(--dim);font-weight:500;margin-right:4px}
+
+/* 문제 카드 */
+.prob{border-top:6px solid var(--accent);animation:pop .35s ease}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+.tag{display:inline-block;font-size:12px;font-weight:900;color:#fff;background:var(--accent);border-radius:8px;padding:2px 8px;margin-bottom:6px}
+.prob h2{font-size:21px;margin:0 0 2px}
+.prob .how{font-size:15px;color:var(--dim);margin-bottom:14px}
+.prob.boss{border-top-color:var(--boss);background:linear-gradient(#fff6f4,#fff 40%)}
+.prob.boss .tag{background:var(--boss);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.5}}
+.calm{text-align:center;color:var(--dim);padding:34px 0}
+.calm .e{font-size:40px}
+.cable{display:flex;align-items:center;gap:10px;margin:10px 0;cursor:pointer}
+.cable .no{width:24px;font-weight:900;color:var(--dim);text-align:center}
+.cable .wire{flex:1;height:36px;border-radius:18px;border:2px solid #0002;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-weight:700;font-size:15px;box-shadow:inset 0 -4px 0 #0000001a}
+.cable.cut .wire{background-image:linear-gradient(90deg,transparent 46%,#fff 46%,#fff 54%,transparent 54%)!important;opacity:.45}
+.sws{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sw{background:#f6f6f4;border:2px solid var(--line);border-radius:16px;padding:10px 0;text-align:center;cursor:pointer;font-weight:700;font-size:15px}
+.sw .dot{width:22px;height:22px;border-radius:50%;margin:0 auto 4px;border:2px solid #0003}
+.lever{width:30px;height:56px;margin:6px auto 4px;border-radius:8px;background:#333;position:relative}
+.lever:after{content:"";position:absolute;left:4px;right:4px;height:22px;border-radius:5px;background:#bbb;bottom:4px;transition:bottom .15s}
+.sw.on{border-color:var(--good);background:#effaf3}
+.sw.on .lever:after{bottom:30px;background:#6ee08a}
+.sw small{color:var(--dim);font-weight:500}
+.chat{background:#b9d0e3;border-radius:18px;padding:12px;margin-bottom:12px}
+.chat .from{font-size:14px;font-weight:700;margin-bottom:4px}
+.chat .msg{background:#fff;border-radius:4px 14px 14px 14px;padding:10px 12px;font-size:17px;display:inline-block}
+.rep{display:block;width:100%;margin:8px 0;background:#fff;color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:13px 14px;font:inherit;font-weight:500;text-align:left;cursor:pointer}
+.rep:active{background:#f1f5f9}
+.dogpic{text-align:center;line-height:1;margin:4px 0 10px}
+.hold{border:3px dashed var(--main2);border-radius:18px;padding:16px;text-align:center;cursor:pointer;touch-action:none;background:#f5f9fd}
+.hold .big{font-size:18px;font-weight:700;color:var(--main)}
+.hold .s{font-size:14px;color:var(--dim)}
+.lamp{width:26px;height:26px;border-radius:50%;margin:0 auto 6px;background:#ddd;transition:.2s}
+.bag{font-weight:900;margin-top:6px;min-height:24px}
+.c{display:inline-flex;align-items:center;gap:4px;font-weight:700}
+.c:before{content:"";width:13px;height:13px;border-radius:50%;background:var(--cc);border:1.5px solid #0003}
+.keys{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.key{background:#fff;border:2px solid #e8d6d2;border-radius:18px;padding:14px 0 10px;text-align:center;cursor:pointer;box-shadow:0 4px 0 #e8d6d2}
+.key:active{transform:translateY(3px);box-shadow:0 1px 0 #e8d6d2}
+.key .e{font-size:40px;line-height:1.1}
+.key .n{font-size:15px;font-weight:700;color:#555}
+.key.on{background:#effaf3;border-color:var(--good);box-shadow:0 4px 0 #bfe6cd}
+.key.on .n{color:var(--good)}
+.lockbar{display:flex;justify-content:center;gap:8px;margin:0 0 12px}
+.lockbar i{width:16px;height:16px;border-radius:50%;background:#eadbd7}
+.lockbar i.on{background:var(--good)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(10px);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;opacity:0;transition:.25s;pointer-events:none;max-width:92%;text-align:center;box-shadow:0 6px 18px #0003}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.shake{animation:shake .35s}@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+/* 지침서 */
+.mhead{background:linear-gradient(145deg,#ef7d57,#d9603a);color:#fff;border-radius:22px;padding:18px;box-shadow:0 6px 18px #d9603a40}
+.mhead h2{margin:0;font-size:22px}
+.mhead p{margin:4px 0 0;font-size:14px;opacity:.92}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.tab{background:#fff;border:2px solid var(--line);border-radius:14px;padding:9px 0;text-align:center;font-weight:700;font-size:15px;cursor:pointer}
+.tab.on{background:var(--main);border-color:var(--main);color:#fff}
+.tab.bt{border-color:#e8c4bd;color:var(--boss)}
+.tab.bt.on{background:var(--boss);border-color:var(--boss);color:#fff}
+.rule h3{font-size:17px;margin:16px 0 6px;color:var(--main)}
+.rule h3:first-child{margin-top:0}
+.rule ol{margin:0;padding-left:22px}
+.rule li{margin:6px 0}
+.rule .tip{background:#fff4ec;border-radius:12px;padding:10px 12px;font-size:15px;margin-top:12px}
+.arrow{color:var(--accent);font-weight:900}
+table{width:100%;border-collapse:collapse;margin-top:6px}
+td{border-bottom:1px solid var(--line);padding:7px 4px}
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.col{background:#faf7f2;border:1px solid var(--line);border-radius:12px;padding:6px 2px;text-align:center}
+.col .h{font-weight:900;color:var(--boss);font-size:14px;margin-bottom:2px}
+.col div{font-size:13px;padding:3px 0;line-height:1.25}
+.col div span{font-size:20px;display:block}
+.res .n{font-size:58px;font-weight:900;color:var(--main);line-height:1.1;text-align:center}
+.res .l{text-align:center;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+<script>
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const CV={'빨강':'var(--red)','파랑':'var(--blue)','노랑':'var(--yellow)','흰색':'var(--white)','검정':'var(--black)','초록':'var(--green)'};
+const C=n=>`<span class="c" style="--cc:${CV[n]}">${n}</span>`;
+
+const PLACES=[['두드림','4A'],['두드림','5A'],['두드림','4B'],['성전','하늘교육관'],['성전','2-5교육관'],['성전','2-4교육관']];
+const MEETS=[['지역 월례회',15,35],['장년회 친분모임',8,20],['부녀회 전체모임',20,40],['청년회 기도회',6,25]];
+const KINDS={cable:'🎤 음향',breaker:'💡 차단기',chat:'💬 단톡방',dog:'🐕 강아지',boss:'🔐 보스'};
+
+// ===== 1. 음향 케이블 =====
+function genCable(){const n=ri(3,5);const cs=Array.from({length:n},()=>rnd(['빨강','파랑','노랑','흰색','검정']));return{type:'cable',cs,cut:[],ans:solveCable(cs)}}
+function solveCable(cs){
+  const n=cs.length,c=x=>cs.filter(y=>y===x).length,last=cs[n-1],sj=G.bld==='성전',li=x=>cs.lastIndexOf(x);
+  if(n===3){if(!c('빨강'))return 1;if(last==='흰색')return 2;if(c('파랑')>=2)return li('파랑');return 2}
+  if(n===4){if(c('빨강')>=2&&sj)return li('빨강');if(last==='노랑'&&!c('빨강'))return 0;if(c('파랑')===1)return 0;if(c('노랑')>=2)return 3;return 1}
+  if(last==='검정'&&sj)return 3;if(c('빨강')===1&&c('노랑')>=2)return 0;if(!c('검정'))return 1;return 0;
+}
+// ===== 2. 차단기 =====
+function genBreaker(){let o=G.people>=20?['빨강','초록','노랑','흰색']:['흰색','노랑','초록','빨강'];if(G.room.includes('4'))o=[...o].reverse();return{type:'breaker',tags:shuffle(['흰색','노랑','초록','빨강']),on:[],order:o}}
+// ===== 3. 단톡방 =====
+const CHATS=[['모르는 번호','[광고] 성경책 90% 할인! http://bit.ly/xx'],['모르는 번호','오늘 모임 취소됐대요~'],['모르는 번호','무료 이벤트 당첨! http://ev.kr'],
+['기획부장','혹시 장소 변경됐나요?'],['기획부장','순서지는 몇 장 준비됐나요?'],['전도부장','오늘 처음 오시는 분이 3명 있어요!'],['전도부장','모임 취소됐다는 말이 돌던데요?'],
+['심방부장','다과는 몇 시까지 가져가면 될까요?'],['심방부장','장소 변경됐다던데 어디로 가요?'],['새신자부장','새가족 명찰 준비됐나요?'],
+['교육부장','찬양 악보 어디 있어요?'],['교육부장','조금 늦을 것 같아요 ㅠㅠ'],['문화부장','오늘 모임 취소된 거 맞죠?'],['문화부장','영상 USB 어디 있어요?'],
+['새가족','처음 가는데 주차는 어디에 하나요?'],['새가족','모임 취소됐다고 들었는데 맞나요?']];
+const REPS=['📌 정정 공지 올리기','📞 직접 전화하기','🚫 신고하고 내보내기','💬 친절히 답장하기'];
+function genChat(){const[w,m]=rnd(CHATS);let a;
+  if(w==='모르는 번호'&&(m.includes('http')||m.includes('광고')))a=2;
+  else if(m.includes('취소')||m.includes('변경'))a=w==='기획부장'?1:0;
+  else if(w==='새가족')a=3;
+  else if(w==='심방부장'||w==='새신자부장'||(w==='교육부장'&&G.meet==='청년회 기도회'))a=1;
+  else a=3;
+  return{type:'chat',w,m,ans:a}}
+// ===== 4. 강아지 =====
+const DOGN=['복실이','초코','해피','콩이','복동이','뭉치','보리','두부'];
+const BAG={'파랑':'4','노랑':'2','초록':'6','빨강':'1'};
+function genDog(){const d={type:'dog',size:rnd(['소형','중형','대형']),collar:rnd(['빨강','파랑','초록']),name:rnd(DOGN)};
+  d.ans=G.meet==='부녀회 전체모임'?'hold':d.size==='대형'?'hold':(d.collar==='빨강'&&G.people%2===1)?'tap':d.name.includes('복')?'hold':'tap';return d}
+// ===== 5. 보스: 잠긴 문 =====
+const SYM={'사과':'🍎','비둘기':'🕊️','별':'⭐','종':'🔔','나뭇잎':'🌿','물고기':'🐟','빵':'🍞','촛불':'🕯️','닻':'⚓','왕관':'👑','달':'🌙','물방울':'💧'};
+const COLS=[['가',['사과','비둘기','별','종','나뭇잎','물고기','빵']],['나',['닻','사과','왕관','비둘기','달','종','물방울']],
+['다',['나뭇잎','물방울','빵','닻','별','촛불','왕관']],['라',['촛불','달','물고기','물방울','사과','별','비둘기']]];
+function genBoss(){
+  let col,pick;
+  for(;;){col=rnd(COLS);pick=shuffle(col[1]).slice(0,4);
+    if(COLS.filter(c=>pick.every(p=>c[1].includes(p))).length===1)break}
+  let order=col[1].filter(s=>pick.includes(s));
+  if(G.bld==='성전')order=order.reverse();
+  return{type:'boss',keys:shuffle(pick),order,on:[]};
+}
+
+// ===== 진행 =====
+let G,tid,gap,DAY;const app=document.getElementById('app');
+const fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+function brief(){
+  const p=rnd(PLACES),m=rnd(MEETS);DAY={bld:p[0],room:p[1],meet:m[0],people:ri(m[1],m[2])};
+  app.innerHTML=`<div class="h1">📋 오늘의 임무</div>
+  <div class="card talk"><div class="av">🧑‍💼</div><div><div class="who">기획부장님</div>
+  <div class="say">사명자님, 오늘 <b>${DAY.meet}</b> 준비 맡아 주세요.<br><br>문제 생기면 당황하지 말고 <b>도우미</b>한테 상황을 정확히 설명하세요. 지침서에 적힌 대로만 처리하면 됩니다. 이상. 📋</div></div></div>
+  <div class="card info"><div class="k">📅 모임</div><div class="v">${DAY.meet}</div><div class="k">📍 장소</div><div class="v">${DAY.bld} · ${DAY.room}</div>
+  <div class="k">👥 인원</div><div class="v">${DAY.people}명</div><div class="k">⏰ 시간</div><div class="v">4분 · 문제 5개 + 보스 1개</div></div>
+  <button class="btn" onclick="start()">준비 시작! ▶</button>`;
+}
+function start(){
+  clearInterval(tid);clearTimeout(gap);
+  G={total:240,time:240,strikes:0,done:0,need:6,cur:null,over:false,...DAY};
+  G.queue=[...shuffle(['cable','breaker','chat','dog',rnd(['cable','breaker','chat','dog'])]),'boss'];
+  tid=setInterval(()=>{G.time--;const t=document.getElementById('t');if(t){t.textContent=fmt(G.time);t.classList.toggle('low',G.time<=30)}if(G.time<=0)end(false)},1000);
+  spawn();
+}
+function spawn(){const t=G.queue[G.done];
+  G.cur={cable:genCable,breaker:genBreaker,chat:genChat,dog:genDog,boss:genBoss}[t]();
+  if(t==='boss'){tone(220,.3,'sawtooth',.06);tone(196,.5,'sawtooth',.06,.3)}else{tone(880,.12,'square',.05);tone(660,.12,'square',.05,.15)}
+  render()}
+function ok(msg){G.done++;G.cur=null;toast('✅ '+msg,'good');tone(660,.5,'triangle',.12);tone(880,.7,'triangle',.12,.12);if(G.done>=G.need)return end(true);render();gap=setTimeout(spawn,ri(1200,2200))}
+function miss(msg){G.strikes++;toast('❌ '+msg,'bad');tone(110,.4,'sawtooth',.08);
+  const s=document.getElementById('sh');if(s)s.innerHTML=shields();
+  const p=document.getElementById('p');if(p){p.classList.remove('shake');void p.offsetWidth;p.classList.add('shake')}
+  if(G.strikes>=3)setTimeout(()=>end(false),900)}
+const shields=()=>'🛡️'.repeat(Math.max(0,3-G.strikes))+`<span style="opacity:.25">${'🛡️'.repeat(Math.min(3,G.strikes))}</span>`;
+
+function render(){
+  const c=G.cur,n=G.done+1;let b;
+  const head=(h,how,boss)=>`<div class="tag">${boss?'⚠️ BOSS · 마지막 관문':`문제 ${n} / 5`}</div><h2>${h}</h2><div class="how">${how}</div>`;
+  if(!c) b=`<div class="card calm"><div class="e">☕</div>잠시 조용합니다.<br>다음 문제에 대비하세요!</div>`;
+  else if(c.type==='cable') b=`<div class="card prob" id="p">${head('🎤 음향 케이블이 엉켰어요!','하울링이 나요. 케이블 <b>하나</b>만 잘라 주세요.')}
+    ${c.cs.map((x,i)=>`<div class="cable ${c.cut.includes(i)?'cut':''}" onclick="cut(${i})"><div class="no">${i+1}</div><div class="wire" style="background:${CV[x]};color:${x==='검정'?'#fff':'#0009'}">${x}</div></div>`).join('')}</div>`;
+  else if(c.type==='breaker') b=`<div class="card prob" id="p">${head('💡 정전이에요!','차단기를 <b>정해진 색 순서</b>대로 하나씩 올려 주세요.')}
+    <div class="sws">${c.tags.map(t=>`<div class="sw ${c.on.includes(t)?'on':''}" onclick="flip('${t}')"><div class="dot" style="background:${CV[t]}"></div>${t}<div class="lever"></div><small>${c.on.includes(t)?'켜짐':'꺼짐'}</small></div>`).join('')}</div></div>`;
+  else if(c.type==='chat') b=`<div class="card prob" id="p">${head('💬 단톡방이 시끄러워요!','이 메시지에 어떻게 대응할까요?')}
+    <div class="chat"><div class="from">👤 ${c.w}</div><div class="msg">${c.m}</div></div>
+    ${REPS.map((r,i)=>`<button class="rep" onclick="reply(${i})">${r}</button>`).join('')}</div>`;
+  else if(c.type==='dog') b=`<div class="card prob" id="p">${head('🐕 강아지가 들어왔어요!','모임 장소에서 내보내야 해요.')}
+    <div class="dogpic" style="font-size:${c.size==='대형'?84:c.size==='중형'?64:46}px">🐕</div>
+    <div class="info" style="margin-bottom:14px"><div class="k">크기</div><div class="v">${c.size}</div><div class="k">목줄</div><div class="v">${C(c.collar)}</div><div class="k">이름표</div><div class="v">${c.name}</div></div>
+    <div class="hold" id="h"><div class="lamp" id="lp"></div><div class="big">여기를 눌러 대응하기</div>
+    <div class="s">짧게 누르기 = 🚪 문 닫기<br>길게 누르기 = 🦴 간식으로 데리고 나가기</div><div class="bag" id="bag"></div></div></div>`;
+  else b=`<div class="card prob boss" id="p">${head('🔐 모임 장소 문이 잠겼어요!','도어락 그림 버튼 4개를 <b>정해진 순서</b>대로 눌러야 열려요. 틀리면 처음부터!',1)}
+    <div class="lockbar">${c.order.map((_,i)=>`<i class="${i<c.on.length?'on':''}"></i>`).join('')}</div>
+    <div class="keys">${c.keys.map(k=>`<div class="key ${c.on.includes(k)?'on':''}" onclick="press('${k}')"><div class="e">${SYM[k]}</div><div class="n">${k}</div></div>`).join('')}</div></div>`;
+  app.innerHTML=`<div class="status"><div class="row1"><div class="shield" id="sh">${shields()}</div><div>모임 시작까지</div></div>
+  <div class="clock ${G.time<=30?'low':''}" id="t">${fmt(G.time)}</div>
+  <div class="steps">${G.queue.map((q,i)=>`<i class="${i<G.done?'on':i===G.done?'now':''} ${q==='boss'?'boss':''}"></i>`).join('')}</div></div>
+  <div class="meta"><div class="chip"><span>모임</span>${G.meet}</div><div class="chip"><span>장소</span>${G.bld} · ${G.room}</div><div class="chip"><span>인원</span>${G.people}명</div></div>${b}`;
+  if(c&&c.type==='dog')bindHold();
+}
+function cut(i){const c=G.cur;if(!c||c.cut.includes(i))return;c.cut.push(i);document.querySelectorAll('.cable')[i].classList.add('cut');i===c.ans?ok('하울링이 멈췄어요'):miss('다른 케이블이었어요')}
+function flip(t){const c=G.cur;if(!c||c.on.includes(t))return;tone(700,.05,'square',.04);
+  if(t===c.order[c.on.length]){c.on.push(t);render();if(c.on.length===4)ok('불이 들어왔어요')}else{c.on=[];miss('순서가 틀려 다시 내려갔어요');setTimeout(()=>{if(G.cur===c)render()},400)}}
+function reply(i){i===G.cur.ans?ok('단톡방이 조용해졌어요'):miss('대응이 맞지 않았어요')}
+function press(k){const c=G.cur;if(!c||c.on.includes(k))return;tone(900,.06,'square',.04);
+  if(k===c.order[c.on.length]){c.on.push(k);render();if(c.on.length===4)ok('철컥! 문이 열렸어요')}else{c.on=[];miss('삐빅! 처음부터 다시 눌러야 해요');setTimeout(()=>{if(G.cur===c)render()},400)}}
+function bindHold(){const b=document.getElementById('h'),lp=document.getElementById('lp'),bag=document.getElementById('bag');let h,col,down=false;
+  b.onpointerdown=e=>{e.preventDefault();down=true;col=null;h=setTimeout(()=>{col=rnd(Object.keys(BAG));lp.style.background=CV[col];lp.style.boxShadow=`0 0 14px 4px ${CV[col]}`;bag.innerHTML='간식 봉투: '+C(col)+' — 알맞을 때 손을 떼세요'},600)};
+  const up=()=>{if(!down)return;down=false;clearTimeout(h);lp.style.background='#ddd';lp.style.boxShadow='none';bag.innerHTML='';
+    const d=G.cur;if(!d)return;
+    if(!col)return d.ans==='tap'?ok('문을 닫았어요'):miss('간식으로 데리고 나가야 했어요');
+    if(d.ans==='tap')return miss('문만 닫으면 됐어요');
+    fmt(G.time).includes(BAG[col])?ok('강아지가 간식 따라 나갔어요'):miss('손 떼는 때가 틀렸어요')};
+  b.onpointerup=up;b.onpointerleave=up;b.onpointercancel=up;b.oncontextmenu=e=>e.preventDefault()}
+function end(win){if(G.over)return;G.over=true;clearInterval(tid);clearTimeout(gap);
+  if(win){tone(523,.3,'triangle',.12);tone(659,.3,'triangle',.12,.15);tone(784,.6,'triangle',.12,.3)}
+  const say=!win?'음… 원인부터 분석해 봅시다. 지침서 다시 숙지하고 한 번 더 하세요. 📋':G.strikes===0?'실수 0회. 효율적이네요. 이 정도면 인정합니다. 👍':`모임은 시작됐네요. 실수 ${G.strikes}회는 다음에 줄여 봅시다. ✔️`;
+  app.innerHTML=`<div class="hero"><div class="ic">${win?'🎉':'😢'}</div><h1>${win?'모임 시작!':'모임이 흔들렸어요'}</h1><p>${G.meet} · ${G.bld} ${G.room}</p></div>
+  <div class="card res"><div class="n">${G.done} / 6</div><div class="l">해결한 문제 · 남은 방패 ${Math.max(0,3-G.strikes)}개${win?` · 남은 시간 ${fmt(G.time)}`:''}</div></div>
+  <div class="card talk"><div class="av">🧑‍💼</div><div><div class="who">기획부장님</div><div class="say">${say}</div></div></div>
+  <button class="btn" onclick="title()">처음으로</button>`}
+function title(){clearInterval(tid);clearTimeout(gap);
+  app.innerHTML=`<div class="hero"><div class="ic">🛡️</div><h1>모임을 지켜라</h1><p>지역 총무부 사명자의 하루</p></div>
+  <div class="card talk"><div class="av">🙋</div><div><div class="who">나는…</div><div class="say">지역 <b>총무부 사명자</b>!<br>모임이 시작되기 전까지 음향, 정전, 단톡방, 강아지… 그리고 마지막 <b>보스</b>까지 막아야 해요!</div></div></div>
+  <div class="card"><div style="font-weight:900;margin-bottom:4px">👫 두 명이 함께 하는 게임</div>
+   <div class="role"><div class="ri">🙋</div><div><b>사명자</b> · 이 폰<div class="d">게임 화면을 보고 문제를 처리해요. 지침서는 <b>볼 수 없어요!</b></div></div></div>
+   <div class="role"><div class="ri">📖</div><div><b>도우미</b> · 다른 폰<div class="d">같은 링크를 열고 ‘도우미 화면’을 눌러요. 지침서만 보며 말로 알려 줘요.</div></div></div>
+   <div class="role"><div class="ri">🛡️</div><div><b>방패 3개</b><div class="d">실수하면 하나씩 깨져요. 다 깨지면 실패!</div></div></div></div>
+  <button class="btn" onclick="brief()">🙋 사명자로 시작하기</button>
+  <button class="btn sub" onclick="manOnly()">📖 도우미 화면 (지침서)</button>`}
+
+// ===== 지침서 =====
+let TAB='cable';
+const RULES={
+cable:`<h3>케이블 3개일 때</h3><ol>
+ <li>${C('빨강')}이 없으면 <span class="arrow">→</span> 2번째</li>
+ <li>마지막이 ${C('흰색')}이면 <span class="arrow">→</span> 마지막</li>
+ <li>${C('파랑')}이 2개 이상이면 <span class="arrow">→</span> 맨 아래 파랑</li>
+ <li>그 외 <span class="arrow">→</span> 마지막</li></ol>
+ <h3>케이블 4개일 때</h3><ol>
+ <li>${C('빨강')}이 2개 이상이고 <b>성전</b> 건물이면 <span class="arrow">→</span> 맨 아래 빨강</li>
+ <li>마지막이 ${C('노랑')}이고 빨강이 없으면 <span class="arrow">→</span> 1번째</li>
+ <li>${C('파랑')}이 딱 1개면 <span class="arrow">→</span> 1번째</li>
+ <li>${C('노랑')}이 2개 이상이면 <span class="arrow">→</span> 마지막</li>
+ <li>그 외 <span class="arrow">→</span> 2번째</li></ol>
+ <h3>케이블 5개일 때</h3><ol>
+ <li>마지막이 ${C('검정')}이고 <b>성전</b> 건물이면 <span class="arrow">→</span> 4번째</li>
+ <li>${C('빨강')}이 딱 1개, ${C('노랑')}이 2개 이상이면 <span class="arrow">→</span> 1번째</li>
+ <li>${C('검정')}이 없으면 <span class="arrow">→</span> 2번째</li>
+ <li>그 외 <span class="arrow">→</span> 1번째</li></ol>
+ <div class="tip">💡 번호는 위에서부터 셉니다. 규칙은 위에서부터 보고 <b>처음 맞는 것</b>만 따르세요.</div>`,
+breaker:`<h3>차단기 올리는 순서</h3>
+ <table><tr><td>인원 <b>20명 이상</b></td><td>${C('빨강')} → ${C('초록')} → ${C('노랑')} → ${C('흰색')}</td></tr>
+ <tr><td>인원 <b>20명 미만</b></td><td>${C('흰색')} → ${C('노랑')} → ${C('초록')} → ${C('빨강')}</td></tr></table>
+ <div class="tip">⚠️ 장소 이름에 숫자 <b>4</b>가 들어 있으면 (4A, 4B, 2-4교육관) 순서를 <b>거꾸로</b> 하세요.<br>틀리면 처음부터 다시 올려야 해요.</div>`,
+chat:`<h3>단톡방 대응</h3><ol>
+ <li><b>모르는 번호</b>가 링크나 광고를 보냈다 <span class="arrow">→</span> 🚫 신고하고 내보내기</li>
+ <li>‘<b>취소</b>’나 ‘<b>변경</b>’ 이야기가 있다<br><span class="arrow">→</span> <b>기획부장</b>이 보냈으면 📞 직접 전화하기<br><span class="arrow">→</span> 그 외에는 📌 정정 공지 올리기</li>
+ <li><b>새가족</b>이 보냈다 <span class="arrow">→</span> 💬 친절히 답장하기</li>
+ <li><b>심방부장</b>이나 <b>새신자부장</b>이 보냈다 <span class="arrow">→</span> 📞 직접 전화하기<br>(청년회 기도회 날에는 <b>교육부장</b>도 📞 직접 전화하기)</li>
+ <li>그 외 <span class="arrow">→</span> 💬 친절히 답장하기</li></ol>
+ <div class="tip">💡 위에서부터 보고 <b>처음 맞는 것</b>만 따르세요.</div>`,
+dog:`<h3>짧게? 길게?</h3><ol>
+ <li><b>부녀회 전체모임</b> 날이면 <span class="arrow">→</span> 길게 (간식)</li>
+ <li><b>대형</b>견이면 <span class="arrow">→</span> 길게 (간식)</li>
+ <li>목줄이 ${C('빨강')}이고 인원이 <b>홀수</b>면 <span class="arrow">→</span> 짧게 (문 닫기)</li>
+ <li>이름에 ‘<b>복</b>’ 자가 있으면 <span class="arrow">→</span> 길게 (간식)</li>
+ <li>그 외 <span class="arrow">→</span> 짧게 (문 닫기)</li></ol>
+ <h3>길게 누를 때 — 손 떼는 때</h3>
+ 누르고 있으면 간식 봉투 색이 나와요. <b>시계에 이 숫자가 보일 때</b> 손을 떼세요.
+ <table><tr><td>${C('파랑')} 봉투</td><td><b>4</b></td></tr><tr><td>${C('노랑')} 봉투</td><td><b>2</b></td></tr><tr><td>${C('초록')} 봉투</td><td><b>6</b></td></tr><tr><td>${C('빨강')} 봉투</td><td><b>1</b></td></tr></table>
+ <div class="tip">예) 시계가 <b>2:41</b>이면 2, 4, 1이 보이는 거예요.</div>`,
+boss:`<h3>🔐 잠긴 문 여는 법</h3><ol>
+ <li>사명자에게 도어락의 <b>그림 4개</b>를 물어보세요.</li>
+ <li>아래 네 줄(가·나·다·라) 중에서 <b>그림 4개가 모두 들어 있는 줄</b>을 찾으세요. (딱 한 줄뿐!)</li>
+ <li>그 줄에서 <b>위에서 아래 순서</b>대로 4개를 누르게 알려 주세요.</li></ol>
+ <div class="tip">⚠️ 장소가 <b>성전</b> 건물이면 <b>아래에서 위로</b> (거꾸로) 눌러야 해요!</div>
+ <div class="cols">${COLS.map(c=>`<div class="col"><div class="h">${c[0]}</div>${c[1].map(s=>`<div><span>${SYM[s]}</span>${s}</div>`).join('')}</div>`).join('')}</div>`
+};
+function manHTML(){
+  return `<div class="mhead"><h2>📖 총무부 지침서 (도우미용)</h2><p>사명자가 말해 주는 문제의 탭을 눌러 규칙을 읽어 주세요. 이 화면은 사명자에게 보여 주지 마세요! 🤫</p></div>
+  <div class="tabs">${Object.entries(KINDS).map(([k,v])=>`<div class="tab ${k==='boss'?'bt':''} ${TAB===k?'on':''}" onclick="TAB='${k}';manOnly()">${v}</div>`).join('')}</div>
+  <div class="card rule">${RULES[TAB]}</div>`;
+}
+function manOnly(){location.hash='manual';clearInterval(tid);clearTimeout(gap);app.innerHTML=manHTML()}
+
+let tt;function toast(m,k){const t=document.getElementById('toast');t.textContent=m;t.style.background=k==='good'?'var(--good)':'var(--bad)';t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),1600)}
+let AC;function tone(f,d,ty,v,dl=0){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime+dl,o=AC.createOscillator(),g=AC.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
+if(location.hash==='#manual')manOnly();else title();
+addEventListener('hashchange',()=>{if(location.hash==='#manual')manOnly()});
+</script>
+</body>
+</html>
